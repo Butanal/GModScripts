@@ -65,6 +65,8 @@ local function checkIdle(client, cmd)
 end
 
 hook.Add("Initialize", "BetterAntiAFK", function()
-    timer.Remove("idlecheck")
-    hook.Add("StartCommand", "BetterAntiAFK", checkIdle)
+    if not system.IsOSX() then -- keep legacy check for OSX (see https://wiki.garrysmod.com/page/system/HasFocus)
+        timer.Remove("idlecheck")
+        hook.Add("StartCommand", "BetterAntiAFK", checkIdle)
+    end
 end )
